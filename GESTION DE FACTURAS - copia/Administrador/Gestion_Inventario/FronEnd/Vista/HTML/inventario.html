@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Inventario y Análisis</title>
+    <link
+      rel="stylesheet"
+      href="../../../../../Global/Font Awesome/css/all.min.css"
+    />
+    <style>
+      /* Colores del sistema de facturación */
+      :root {
+        --color-primario: #2c3e50; /* Azul oscuro */
+        --color-secundario: #3498db; /* Azul brillante */
+        --color-exito: #27ae60; /* Verde */
+        --color-advertencia: #f39c12; /* Naranja */
+        --color-peligro: #e74c3c; /* Rojo */
+        --color-gris-claro: #ecf0f1; /* Gris claro */
+        --color-gris-medio: #bdc3c7; /* Gris medio */
+        --color-gris-oscuro: #7f8c8d; /* Gris oscuro */
+        --color-fondo: #f9f9f9; /* Fondo claro */
+        --color-texto: #2c3e50; /* Texto oscuro */
+        --color-blanco: #ffffff; /* Blanco */
+        --color-sombra: rgba(0, 0, 0, 0.1); /* Sombra ligera */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Encabezado */
+      header {
+        background-color: var(--color-primario);
+        color: var(--color-blanco);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 12px var(--color-sombra);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .logo i {
+        font-size: 2.5rem;
+        color: var(--color-secundario);
+      }
+
+      .logo h1 {
+        font-size: 1.8rem;
+      }
+
+      .logo span {
+        color: var(--color-secundario);
+      }
+
+      /* Tarjetas de resumen */
+      .resumen-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        background-color: var(--color-blanco);
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px var(--color-sombra);
+        border-left: 5px solid var(--color-secundario);
+      }
+
+      .card.exito {
+        border-left-color: var(--color-exito);
+      }
+
+      .card.advertencia {
+        border-left-color: var(--color-advertencia);
+      }
+
+      .card.peligro {
+        border-left-color: var(--color-peligro);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .card-header i {
+        font-size: 1.8rem;
+        color: var(--color-secundario);
+      }
+
+      .card.exito .card-header i {
+        color: var(--color-exito);
+      }
+
+      .card.advertencia .card-header i {
+        color: var(--color-advertencia);
+      }
+
+      .card.peligro .card-header i {
+        color: var(--color-peligro);
+      }
+
+      .card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
+
+      .card p {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      /* Sección de filtros */
+      .filtros-section {
+        background-color: var(--color-blanco);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px var(--color-sombra);
+      }
+
+      .filtros-section h2 {
+        margin-bottom: 20px;
+        color: var(--color-primario);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .filtros-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .filtro-group {
+        margin-bottom: 15px;
+      }
+
+      .filtro-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--color-primario);
+      }
+
+      .filtro-group select,
+      .filtro-group input {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid var(--color-gris-medio);
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.3s;
+      }
+
+      .filtro-group select:focus,
+      .filtro-group input:focus {
+        outline: none;
+        border-color: var(--color-secundario);
+      }
+
+      .botones-filtro {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        grid-column: 1 / -1;
+      }
+
+      .btn {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primario {
+        background-color: var(--color-secundario);
+        color: var(--color-blanco);
+      }
+
+      .btn-primario:hover {
+        background-color: #2980b9;
+      }
+
+      .btn-secundario {
+        background-color: var(--color-gris-claro);
+        color: var(--color-primario);
+      }
+
+      .btn-secundario:hover {
+        background-color: #d5dbdb;
+      }
+
+      /* Tabla de resultados */
+      .resultados-section {
+        background-color: var(--color-blanco);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px var(--color-sombra);
+      }
+
+      .resultados-section h2 {
+        margin-bottom: 20px;
+        color: var(--color-primario);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .tabla-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 900px;
+      }
+
+      thead {
+        background-color: var(--color-primario);
+        color: var(--color-blanco);
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--color-gris-claro);
+      }
+
+      tbody tr:hover {
+        background-color: var(--color-gris-claro);
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .badge.exito {
+        background-color: rgba(39, 174, 96, 0.2);
+        color: var(--color-exito);
+      }
+
+      .badge.advertencia {
+        background-color: rgba(243, 156, 18, 0.2);
+        color: var(--color-advertencia);
+      }
+
+      .badge.peligro {
+        background-color: rgba(231, 76, 60, 0.2);
+        color: var(--color-peligro);
+      }
+
+      /* Sección de análisis */
+      .analisis-section {
+        background-color: var(--color-blanco);
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 8px var(--color-sombra);
+      }
+
+      .analisis-section h2 {
+        margin-bottom: 20px;
+        color: var(--color-primario);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .metricas-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .metrica {
+        background-color: var(--color-gris-claro);
+        border-radius: 8px;
+        padding: 20px;
+        border-left: 5px solid var(--color-primario);
+      }
+
+      .metrica h4 {
+        margin-bottom: 10px;
+        color: var(--color-primario);
+      }
+
+      .valor-metrica {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 15px 0;
+      }
+
+      .valor-metrica.positivo {
+        color: var(--color-exito);
+      }
+
+      .valor-metrica.negativo {
+        color: var(--color-peligro);
+      }
+
+      .progreso-bar {
+        height: 10px;
+        background-color: var(--color-gris-medio);
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+
+      .progreso {
+        height: 100%;
+        background-color: var(--color-secundario);
+      }
+
+      .progreso.exito {
+        background-color: var(--color-exito);
+      }
+
+      /* Pie de página */
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: var(--color-gris-oscuro);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--color-gris-claro);
+        margin-top: 30px;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+
+        header {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+        }
+
+        .botones-filtro {
+          flex-direction: column;
+        }
+
+        .filtros-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Encabezado -->
+      <header>
+        <div class="logo">
+          <i class="fas fa-boxes"></i>
+          <h1>Sistema de <span>Inventario</span></h1>
+        </div>
+        <div class="fecha">
+          <p id="fecha-actual"></p>
+        </div>
+      </header>
+
+      <!-- Tarjetas de resumen -->
+      <section class="resumen-cards">
+        <div class="card">
+          <div class="card-header">
+            <h3>Productos en Stock</h3>
+            <i class="fas fa-box"></i>
+          </div>
+          <p id="total-productos">1,245</p>
+          <p class="card-subtitle">+15% este mes</p>
+        </div>
+
+        <div class="card exito">
+          <div class="card-header">
+            <h3>Beneficio Neto</h3>
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <p id="beneficio-neto">$45,280</p>
+          <p class="card-subtitle">+8% este mes</p>
+        </div>
+
+        <div class="card advertencia">
+          <div class="card-header">
+            <h3>Pedidos Pendientes</h3>
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <p id="pedidos-pendientes">23</p>
+          <p class="card-subtitle">5 vencidos</p>
+        </div>
+
+        <div class="card peligro">
+          <div class="card-header">
+            <h3>Productos Bajos</h3>
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <p id="productos-bajos">18</p>
+          <p class="card-subtitle">Reabastecimiento urgente</p>
+        </div>
+      </section>
+
+      <!-- Sección de filtros -->
+      <section class="filtros-section">
+        <h2><i class="fas fa-filter"></i> Filtros de Búsqueda</h2>
+        <div class="filtros-container">
+          <div class="filtro-group">
+            <label for="categoria"><i class="fas fa-tags"></i> Categoría</label>
+            <select id="categoria">
+              <option value="">Todas las categorías</option>
+              <option value="electronica">Electrónica</option>
+              <option value="ropa">Ropa</option>
+              <option value="alimentos">Alimentos</option>
+              <option value="hogar">Hogar</option>
+              <option value="oficina">Oficina</option>
+            </select>
+          </div>
+
+          <div class="filtro-group">
+            <label for="usuario"><i class="fas fa-user"></i> Usuario</label>
+            <select id="usuario">
+              <option value="">Todos los usuarios</option>
+              <option value="admin">Administrador</option>
+              <option value="ventas">Departamento de Ventas</option>
+              <option value="almacen">Almacén</option>
+              <option value="compras">Compras</option>
+            </select>
+          </div>
+
+          <div class="filtro-group">
+            <label for="producto"
+              ><i class="fas fa-box-open"></i> Producto</label
+            >
+            <select id="producto">
+              <option value="">Todos los productos</option>
+              <option value="laptop">Laptop</option>
+              <option value="smartphone">Smartphone</option>
+              <option value="monitor">Monitor</option>
+              <option value="teclado">Teclado</option>
+            </select>
+          </div>
+
+          <div class="filtro-group">
+            <label for="proveedor"
+              ><i class="fas fa-truck"></i> Proveedor</label
+            >
+            <select id="proveedor">
+              <option value="">Todos los proveedores</option>
+              <option value="techcorp">TechCorp</option>
+              <option value="supplyco">SupplyCo</option>
+              <option value="globalsupplies">Global Supplies</option>
+              <option value="qualitygoods">Quality Goods</option>
+            </select>
+          </div>
+
+          <div class="filtro-group">
+            <label for="fecha-inicio"
+              ><i class="fas fa-calendar-alt"></i> Fecha Inicio</label
+            >
+            <input type="date" id="fecha-inicio" />
+          </div>
+
+          <div class="filtro-group">
+            <label for="fecha-fin"
+              ><i class="fas fa-calendar-alt"></i> Fecha Fin</label
+            >
+            <input type="date" id="fecha-fin" />
+          </div>
+
+          <div class="botones-filtro">
+            <button class="btn btn-primario" id="btn-aplicar-filtros">
+              <i class="fas fa-search"></i> Aplicar Filtros
+            </button>
+            <button class="btn btn-secundario" id="btn-limpiar-filtros">
+              <i class="fas fa-undo"></i> Limpiar Filtros
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabla de resultados -->
+      <section class="resultados-section">
+        <h2><i class="fas fa-list"></i> Resultados del Inventario</h2>
+        <div class="tabla-container">
+          <table id="tabla-inventario">
+            <thead>
+              <tr>
+                <th>ID Producto</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Precio Unitario</th>
+                <th>Valor en Stock</th>
+                <th>Estado</th>
+                <th>Proveedor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Los datos se cargarán con JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección de análisis de beneficios -->
+      <section class="analisis-section">
+        <h2><i class="fas fa-chart-bar"></i> Análisis de Beneficios</h2>
+        <div class="metricas-container">
+          <div class="metrica">
+            <h4>Valor Total en Stock</h4>
+            <p class="valor-metrica" id="valor-total-stock">$78,450</p>
+            <p>Valor de todos los productos en inventario</p>
+            <div class="progreso-bar">
+              <div class="progreso" style="width: 85%"></div>
+            </div>
+          </div>
+
+          <div class="metrica">
+            <h4>Ventas Facturadas (Mes)</h4>
+            <p class="valor-metrica" id="ventas-facturadas">$32,150</p>
+            <p>Total de ventas facturadas en el periodo</p>
+            <div class="progreso-bar">
+              <div class="progreso exito" style="width: 65%"></div>
+            </div>
+          </div>
+
+          <div class="metrica">
+            <h4>Gastos en Pedidos (Mes)</h4>
+            <p class="valor-metrica" id="gastos-pedidos">$12,320</p>
+            <p>Total gastado en pedidos este mes</p>
+            <div class="progreso-bar">
+              <div class="progreso" style="width: 40%"></div>
+            </div>
+          </div>
+
+          <div class="metrica">
+            <h4>Beneficio Estimado</h4>
+            <p class="valor-metrica positivo" id="beneficio-estimado">
+              $19,830
+            </p>
+            <p>Ventas - Gastos + Valor Stock</p>
+            <div class="progreso-bar">
+              <div class="progreso exito" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pie de página -->
+      <footer>
+        <p>Sistema de Inventario y Análisis de Beneficios &copy; 2023</p>
+        <p>Última actualización: <span id="fecha-actualizacion"></span></p>
+      </footer>
+    </div>
+
+    <script>
+      // Datos de ejemplo para la tabla
+      const productos = [
+          { id: "P001", nombre: "Laptop Pro", categoria: "electronica", stock: 45, precio: 1200, estado: "disponible", proveedor: "TechCorp" },
+          { id: "P002", nombre: "Smartphone X", categoria: "electronica", stock: 120, precio: 800, estado: "disponible", proveedor: "TechCorp" },
+          { id: "P003", nombre: "Monitor 27\"", categoria: "electronica", stock: 32, precio: 350, estado: "disponible", proveedor: "SupplyCo" },
+          { id: "P004", nombre: "Teclado Mecánico", categoria: "electronica", stock: 87, precio: 120, estado: "disponible", proveedor: "SupplyCo" },
+          { id: "P005", nombre: "Camisa Casual", categoria: "ropa", stock: 156, precio: 45, estado: "disponible", proveedor: "Quality Goods" },
+          { id: "P006", nombre: "Aceite de Oliva", categoria: "alimentos", stock: 24, precio: 18, estado: "bajo", proveedor: "Global Supplies" },
+          { id: "P007", nombre: "Silla Ergonómica", categoria: "oficina", stock: 12, precio: 250, estado: "disponible", proveedor: "SupplyCo" },
+          { id: "P008", nombre: "Impresora Laser", categoria: "oficina", stock: 8, precio: 300, estado: "bajo", proveedor: "TechCorp" },
+          { id: "P009", nombre: "Café Premium", categoria: "alimentos", stock: 56, precio: 22, estado: "disponible", proveedor: "Global Supplies" },
+          { id: "P010", nombre: "Set de Herramientas", categoria: "hogar", stock: 19, precio: 85, estado: "disponible", proveedor: "Quality Goods" }
+      ];
+
+      // Función para formatear números como moneda
+      function formatoMoneda(valor) {
+          return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(valor);
+      }
+
+      // Función para calcular el valor en stock
+      function calcularValorStock(productos) {
+          return productos.reduce((total, producto) => total + (producto.stock * producto.precio), 0);
+      }
+
+      // Función para actualizar la tabla con productos
+      function actualizarTabla(productosFiltrados = productos) {
+          const tbody = document.querySelector('#tabla-inventario tbody');
+          tbody.innerHTML = '';
+
+          productosFiltrados.forEach(producto => {
+              const valorStock = producto.stock * producto.precio;
+              let estadoClass = "badge exito";
+              let estadoText = "Disponible";
+
+              if (producto.estado === "bajo") {
+                  estadoClass = "badge peligro";
+                  estadoText = "Stock Bajo";
+              }
+
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                  <td>${producto.id}</td>
+                  <td>${producto.nombre}</td>
+                  <td>${producto.categoria}</td>
+                  <td>${producto.stock}</td>
+                  <td>${formatoMoneda(producto.precio)}</td>
+                  <td>${formatoMoneda(valorStock)}</td>
+                  <td><span class="${estadoClass}">${estadoText}</span></td>
+                  <td>${producto.proveedor}</td>
+              `;
+              tbody.appendChild(row);
+          });
+
+          // Actualizar métricas
+          actualizarMetricas(productosFiltrados);
+      }
+
+      // Función para actualizar las métricas de análisis
+      function actualizarMetricas(productosFiltrados) {
+          const valorTotalStock = calcularValorStock(productosFiltrados);
+          const productosBajos = productosFiltrados.filter(p => p.estado === "bajo").length;
+
+          // Calcular ventas facturadas (simulado)
+          const ventasFacturadas = valorTotalStock * 0.4; // 40% del valor en stock como ventas
+
+          // Calcular gastos en pedidos (simulado)
+          const gastosPedidos = valorTotalStock * 0.15; // 15% del valor en stock como gastos
+
+          // Calcular beneficio estimado
+          const beneficioEstimado = ventasFacturadas - gastosPedidos + (valorTotalStock * 0.2);
+
+          // Actualizar DOM
+          document.getElementById('valor-total-stock').textContent = formatoMoneda(valorTotalStock);
+          document.getElementById('ventas-facturadas').textContent = formatoMoneda(ventasFacturadas);
+          document.getElementById('gastos-pedidos').textContent = formatoMoneda(gastosPedidos);
+          document.getElementById('beneficio-estimado').textContent = formatoMoneda(beneficioEstimado);
+          document.getElementById('productos-bajos').textContent = productosBajos;
+
+          // Actualizar beneficio neto (simulado)
+          const beneficioNeto = ventasFacturadas - gastosPedidos;
+          document.getElementById('beneficio-neto').textContent = formatoMoneda(beneficioNeto);
+
+          // Actualizar total de productos
+          document.getElementById('total-productos').textContent = productosFiltrados.reduce((total, p) => total + p.stock, 0);
+      }
+
+      // Función para aplicar filtros
+      function aplicarFiltros() {
+          const categoria = document.getElementById('categoria').value;
+          const usuario = document.getElementById('usuario').value;
+          const producto = document.getElementById('producto').value;
+          const proveedor = document.getElementById('proveedor').value;
+          const fechaInicio = document.getElementById('fecha-inicio').value;
+          const fechaFin = document.getElementById('fecha-fin').value;
+
+          let productosFiltrados = productos;
+
+          // Aplicar filtros
+          if (categoria) {
+              productosFiltrados = productosFiltrados.filter(p => p.categoria === categoria);
+          }
+
+          if (producto) {
+              productosFiltrados = productosFiltrados.filter(p => p.nombre.toLowerCase().includes(producto.toLowerCase()));
+          }
+
+          if (proveedor) {
+              productosFiltrados = productosFiltrados.filter(p => p.proveedor === proveedor);
+          }
+
+          // Nota: Los filtros de usuario y fecha son simulados ya que no están en los datos de ejemplo
+          // En un sistema real, estos se aplicarían a diferentes conjuntos de datos
+
+          actualizarTabla(productosFiltrados);
+
+          // Mostrar mensaje de resultados
+          alert(Filtros aplicados. Se encontraron ${productosFiltrados.length} productos.);
+      }
+
+      // Función para limpiar filtros
+      function limpiarFiltros() {
+          document.getElementById('categoria').value = '';
+          document.getElementById('usuario').value = '';
+          document.getElementById('producto').value = '';
+          document.getElementById('proveedor').value = '';
+          document.getElementById('fecha-inicio').value = '';
+          document.getElementById('fecha-fin').value = '';
+
+          actualizarTabla();
+      }
+
+      // Función para establecer fecha actual
+      function establecerFechaActual() {
+          const ahora = new Date();
+          const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          const fechaFormateada = ahora.toLocaleDateString('es-ES', opciones);
+          document.getElementById('fecha-actual').textContent = fechaFormateada;
+
+          // Para la fecha de actualización en el pie de página
+          const fechaActualizacion = ahora.toLocaleDateString('es-ES');
+          document.getElementById('fecha-actualizacion').textContent = fechaActualizacion;
+      }
+
+      // Inicialización cuando se carga la página
+      document.addEventListener('DOMContentLoaded', function() {
+          establecerFechaActual();
+          actualizarTabla();
+
+          // Asignar eventos a los botones
+          document.getElementById('btn-aplicar-filtros').addEventListener('click', aplicarFiltros);
+          document.getElementById('btn-limpiar-filtros').addEventListener('click', limpiarFiltros);
+
+          // Calcular pedidos pendientes (simulado)
+          const pedidosPendientes = Math.floor(Math.random() * 30) + 5;
+          document.getElementById('pedidos-pendientes').textContent = pedidosPendientes;
+      });
+    </script>
+  </body>
+</html>

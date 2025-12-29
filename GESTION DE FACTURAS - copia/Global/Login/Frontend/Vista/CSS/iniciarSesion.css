@@ -1,0 +1,74 @@
+body {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(135deg, #3d456b 0%, #3a2c47 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedorLogin {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+}
+
+.encabezadoLogin {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.nombreSistema {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.cuerpoLogin {
+  padding: 40px 30px;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 12px 15px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+.botonLogin {
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s;
+  font-size: 17px;
+}
+
+.botonLogin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.input-group-text {
+  background-color: white;
+  border: 2px solid #e9ecef;
+  border-right: none;
+}
+
+.form-control {
+  border-left: none;
+}

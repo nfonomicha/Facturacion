@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Facturación</title>
+
+    <link href="../../../../../Global/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../../Global/Font Awesome/css/all.min.css" />
+    <link rel="stylesheet" href="../CSS/index.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg barraNavegacion sticky-top">
+      <div class="container">
+        <span class="nombre">
+          Factura con Candy
+        </span>
+        <div class="collapse navbar-collapse" id="navbarPrincipal">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="navEnlace">
+              <a href="Bienvenida.html" class="nav-link enlaceNavegacion activo">
+                <i class="fas fa-home"></i> Inicio
+              </a>
+            </li>
+            <li class="navEnlace">
+              <a href="/Gestion_Productos/FronEnd/Vista/HTML/Productos.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-box"></i> Productos
+              </a>
+            </li>
+            <li class="navEnlace">
+              <a href="/Gestion_Facturas/FronEnd/Vista/HTML/factuta.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-file-invoice"></i> Facturas
+              </a>
+            </li>
+            <li class="navEnlace">
+              <a href="/Inicio.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="cuadroPresentacion">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h1 class="presentacionTitulo">Bienvenido al Sistema de Facturación</h1>
+            <h1 id="nombreUsuario"></h1>
+            <p class="presentacionSubtitulo">
+              Gestiona tu negocio de manera eficiente con nuestro sistema 
+              de facturación.
+            </p>
+            <div class="d-flex gap-3">
+              <a href="/Gestion_Productos/FronEnd/Vista/HTML/Productos.html" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-box me-2"></i>Ver Productos
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-12 mb-4">
+          <h2 class="mb-3">Accesos Rápidos</h2>
+        </div>
+        <div class="col-md-3 mb-4 accesoProductos">
+          <a href="/Gestion_Productos/FronEnd/Vista/HTML/Productos.html" class="text-decoration-none">
+            <div class="accesoDirecto productos text-center p-4">
+              <div class="icono">
+                <i class="fas fa-box"></i>
+              </div>
+              <h4>Productos</h4>
+              <p class="mb-0">Gestiona el stock de los productos</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3 mb-4 accesoFacturas" >
+          <a href="/Gestion_Facturas/FronEnd/Vista/HTML/factuta.html" class="text-decoration-none">
+            <div class="accesoDirecto facturas text-center p-4">
+              <div class="icono">
+                <i class="fas fa-file-invoice"></i>
+              </div>
+              <h4>Facturas</h4>
+              <p class="mb-0">Crea y gestiona facturas</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3 mb-4 accesoUsuarios">
+          <a href="/Gestion_Usuarios/FronEnd/Vista/HTML/usuarios.html" class="text-decoration-none">
+            <div class="accesoDirecto Usuarios text-center p-4">
+              <div class="icono">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4>Usuarios</h4>
+              <p class="mb-0">Administra a tus empleados</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-3 mb-4 accesoProveedores">
+          <a href="/Gestion_Proveedores/FronEnd/Vista/HTML/proveedores.html" class="text-decoration-none">
+            <div class="accesoDirecto Proveedores text-center p-4">
+              <div class="icono">
+                <i class="fas fa-truck"></i>
+              </div>
+              <h4>Proveedores</h4>
+              <p class="mb-0">Administra a tus proveedores</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    <footer class="piePagina mt-5">
+      <div class="container text-center">
+        <p class="mb-0">&copy; Candy Technologies</p>
+      </div>
+    </footer>
+    <script src="../../../../../Global/Bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../Controladores/index.js"></script>
+  </body>
+</html>

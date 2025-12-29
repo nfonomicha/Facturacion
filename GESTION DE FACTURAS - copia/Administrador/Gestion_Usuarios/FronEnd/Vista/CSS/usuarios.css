@@ -1,0 +1,213 @@
+:root {
+  --color-primario: #2c3e50;
+  --color-secundario: #3498db;
+  --color-exito: #27ae60;
+  --color-advertencia: #f39c12;
+  --color-peligro: #e74c3c;
+  --color-fondo: #f8f9fa;
+  --color-texto: #333333;
+  --color-borde: #e0e0e0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+.barraNavegacion {
+  background-color: var(--color-primario);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.enlaceNavegacion {
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 0 2px;
+}
+
+.enlaceNavegacion:hover,
+.enlaceNavegacion.activo {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.enlaceNavegacion i {
+  margin-right: 8px;
+  width: 20px;
+  text-align: center;
+}
+
+.encabezadoPagina {
+  background: linear-gradient(135deg, var(--color-primario) 0%, #1a2530 100%);
+  color: white;
+  padding: 30px 0;
+  margin-bottom: 30px;
+}
+
+.tarjetaFormulario,
+.tarjetaTabla {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: none;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.tarjetaFormulario .encabezadoFormulario,
+.tarjetaTabla .encabezadoTabla {
+  background-color: var(--color-primario);
+  color: white;
+  border-radius: 8px 8px 0 0;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+}
+
+.cuerpoTarjeta {
+  padding: 20px;
+}
+
+.botonPrimario {
+  background-color: var(--color-exito);
+  border-color: var(--color-exito);
+  width: 150px;
+  height: 40px;
+}
+
+.botonPrimario:hover {
+  background-color: #219653;
+  border-color: #219653;
+  transform: translateY(-4px);
+}
+
+.botonExito {
+  background-color: var(--color-exito);
+  border-color: var(--color-exito);
+}
+
+.botonExito:hover {
+  background-color: #219653;
+  border-color: #219653;
+}
+
+.botonPeligro {
+  background-color: var(--color-peligro);
+  border-color: var(--color-peligro);
+  width: 150px;
+}
+
+.botonPeligro:hover {
+  background-color: #c0392b;
+  border-color: #c0392b;
+  transform: translateY(-4px);
+}
+
+.botonSecundario {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  width: 150px;
+}
+
+.botonSecundario:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+  transform: translateY(-4px);
+}
+
+.tablaUsuarios {
+  overflow: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tablaContenedor {
+  width: 700px;
+}
+.tarjetaTabla {
+  width: 720px;
+}
+.encabezadoTabla {
+  width: 700px;
+}
+
+.tablaUsuarios thead {
+  background-color: var(--color-primario);
+  color: white;
+}
+
+.tablaUsuarios tbody tr:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.badge-estado {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.estado-activo {
+  background-color: var(--color-exito);
+  color: white;
+}
+
+.estado-inactivo {
+  background-color: var(--color-peligro);
+  color: white;
+}
+
+.estado-pendiente {
+  background-color: var(--color-advertencia);
+  color: white;
+}
+
+.contenedorBusqueda {
+  position: relative;
+}
+
+.campoBusqueda {
+  padding-right: 50px;
+}
+
+.botonBusqueda {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-secundario);
+}
+
+.formulario-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.piePagina {
+  background-color: var(--color-primario);
+  color: white;
+  padding: 15px 0;
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .barraNavegacion .navbar-nav {
+    margin-top: 10px;
+  }
+
+  .enlaceNavegacion {
+    margin-bottom: 5px;
+  }
+
+  .contenedorBotones .btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .formulario-grid {
+    grid-template-columns: 1fr;
+  }
+}

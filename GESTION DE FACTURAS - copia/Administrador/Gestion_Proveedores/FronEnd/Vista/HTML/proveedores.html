@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Proveedores</title>
+
+    <link href="../../../../../Global/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../../Global/Font Awesome/css/all.min.css" />
+    <link rel="stylesheet" href="../CSS/proveedores.css" />
+  </head>
+  <body>
+     <nav class="navbar navbar-expand-lg barraNavegacion sticky-top">
+       <div class="container">
+        <div class="collapse navbar-collapse" id="navbarPrincipal" style="height: 50px; font-size:15px;">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a href="/Administrador/inicio.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-home"></i> Inicio
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/Administrador/Gestion_Productos/FronEnd/Vista/HTML/Productos.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-box"></i> Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/Administrador/Gestion_Categorias/FronEnd/Vista/HTML/categorias.html" class="nav-link enlaceNavegacion activo">
+                <i class="fas fa-tags"></i> Categorías
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/Administrador/Gestion_Usuarios/FronEnd/Vista/HTML/usuarios.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-users"></i> Usuarios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/Administrador/Gestion_Proveedores/FronEnd/Vista/HTML/proveedores.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-truck"></i> Proveedores
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/Administrador/Gestion_Pedidos/FronEnd/Vista/HTML/pedidos.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-shopping-cart"></i> Pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link enlaceNavegacion" href="/Administrador/Gestion_Inventario/FronEnd/Vista/HTML/inventario.html"
+                ><i class="fas fa-boxes me-2"></i> Inventario</a
+            </li>
+            <li class="nav-item">
+              <a href="/index.html" class="nav-link enlaceNavegacion">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="encabezado-pagina">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h1 class="mb-2">Gestión de Proveedores</h1>
+            <p class="mb-0">Administra los proveedores de tu empresa o tu negocio</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="tarjetaFormulario">
+            <div class="encabezadoTarjeta">
+              <h3 class="mb-0">
+                <i class="fas fa-truck me-2"></i>Gestión de Proveedores
+              </h3>
+            </div>
+            <div class="cuerpoFormulario">
+              <form id="formularioProveedor" class="formulario">
+                <div class="mb-3">
+                  <label for="empresaProveedor" class="form-label fw-bold"
+                    >Nombre de la Empresa</label
+                  >
+                  <input
+                    type="text"
+                    id="empresaProveedor"
+                    class="form-control"
+                    placeholder="Ingrese el nombre de la empresa"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                    <label for="estadoProveedor" class="form-label fw-bold"
+                      >Estado</label
+                    >
+                    <select id="estadoProveedor" class="form-control" required>
+                      <option value="activo">Activo</option>
+                      <option value="inactivo">Inactivo</option>
+                    </select>
+                  </div>
+
+                <div class="formulario-grid">
+                  <div class="mb-3">
+                    <label for="categoriaProveedor" class="form-label fw-bold"
+                      >Categoria</label
+                    >
+                    <input
+                      type="text"
+                      id="categoriaProveedor"
+                      class="form-control"
+                      placeholder="Nombre de la categoria"
+                      required
+                    />
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="telefonoProveedor" class="form-label fw-bold"
+                      >Teléfono</label
+                    >
+                    <input
+                      type="tel"
+                      id="telefonoProveedor"
+                      class="form-control"
+                      placeholder="Número de teléfono"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="direccionProveedor" class="form-label fw-bold"
+                    >Dirección</label
+                  >
+                  <input
+                    id="direccionProveedor"
+                    class="form-control"
+                    rows="2"
+                    placeholder="Dirección completa del proveedor"
+                    required
+                  />
+                </div>
+
+                <div
+                  class="contenedorBotones d-grid gap-2 d-md-flex justify-content-md-end"
+                >
+                  <button
+                    type="submit"
+                    id="btnAgregar"
+                    class="btn boton-primario text-white me-md-2"
+                  >
+                    <i class="fas fa-plus me-1"></i> Agregar
+                  </button>
+                  <button
+                    type="button"
+                    id="btnEliminar"
+                    class="btn boton-peligro text-white me-md-2"
+                    
+                  >
+                    <i class="fas fa-trash me-1"></i> Eliminar
+                  </button>
+                  <button
+                    type="button"
+                    id="btnCancelar"
+                    class="btn botonSecundario text-white"                  >
+                    <i class="fas fa-times me-1"></i> Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="tarjeta-tabla">
+            <div
+              class="encabezadoTarjeta d-flex justify-content-between align-items-center"
+            >
+              <h3 class="mb-0">
+                <i class="fas fa-list me-2"></i>Lista de Proveedores
+              </h3>
+              <div class="contenedorBusqueda">
+                <input
+                  type="text"
+                  id="buscarProveedor"
+                  class="form-control campo-busqueda"
+                  placeholder="Buscar proveedores..."
+                />
+                <button class="botonBusqueda">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="cuerpoTabla p-0">
+              <div class="tablaContenedor">
+                <table
+                  id="tablaProveedores"
+                  class="table table-hover mb-0 tabla-proveedores"
+                >
+                  <thead>
+                    <tr>
+                      <th width="10%">ID</th>
+                      <th width="22%">Empresa</th>
+                      <th width="18%">Categoria</th>
+                      <th width="18%">Teléfono</th>
+                      <th width="16%">Dirección</th>
+                      <th width="16%">Estado</th>
+
+                    </tr>
+                  </thead>
+                  <tbody id="cuerpoTabla">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="piePagina mt-5">
+      <div class="container text-center">
+        <p class="mb-0">
+          &copy; Candy Technologies
+        </p>
+      </div>
+    </footer>
+    <script src="../../../../../Global/Bootstrap/js/bootstrap.min.js"></script>
+    <script type="module" src="../../Controladores/proveedores.js"></script>
+  </body>
+</html>
